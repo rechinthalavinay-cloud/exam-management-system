@@ -1,0 +1,108 @@
+:root {
+    --primary: #2563eb;
+    --success: #16a34a;
+    --warning: #ca8a04;
+    --danger: #dc2626;
+    --dark: #1e293b;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f1f5f9;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+}
+
+.card-header {
+    border-radius: 12px 12px 0 0 !important;
+    font-weight: 600;
+}
+
+.stat-card {
+    transition: transform 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.table th {
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-grade {
+    font-size: 0.85rem;
+    padding: 0.4em 0.8em;
+}
+
+.grade-A\+, .grade-A { background-color: #16a34a; }
+.grade-B { background-color: #2563eb; }
+.grade-C { background-color: #ca8a04; }
+.grade-D { background-color: #ea580c; }
+.grade-F { background-color: #dc2626; }
+
+.login-card {
+    max-width: 420px;
+    margin-top: 80px;
+}
+
+#alertBox {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 9999;
+    min-width: 300px;
+}
+
+.loading {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.modal-header {
+    background-color: var(--dark);
+    color: white;
+}
+
+.btn-action {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+}
+
+.chart-bar {
+    height: 24px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--primary), #60a5fa);
+    transition: width 0.5s ease;
+}
+
+.analytics-card {
+    min-height: 200px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #94a3b8;
+}
+
+.empty-state i {
+    font-size: 3rem;
+    margin-bottom: 16px;
+}

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Analytics - Examination Module{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Analytics Dashboard</h2>
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="card shadow stat-card text-center p-3 analytics-card">
+                <h6 class="text-muted">Total Students</h6>
+                <p class="stat-number text-primary" id="totalStudents">-</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow stat-card text-center p-3 analytics-card">
+                <h6 class="text-muted">Total Exams</h6>
+                <p class="stat-number text-success" id="totalExams">-</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow stat-card text-center p-3 analytics-card">
+                <h6 class="text-muted">Total Results</h6>
+                <p class="stat-number text-warning" id="totalResults">-</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow stat-card text-center p-3 analytics-card">
+                <h6 class="text-muted">Pass Rate</h6>
+                <p class="stat-number text-info" id="passRate">-</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">Grade Distribution</div>
+                <div class="card-body" id="gradeChart"></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">Student Performance</div>
+                <div class="card-body table-responsive">
+                    <table class="table table-sm table-hover mb-0">
+                        <thead><tr><th>Student</th><th>Exams</th><th>Avg %</th></tr></thead>
+                        <tbody id="performanceTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">Exam Statistics</div>
+                <div class="card-body table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr><th>Exam</th><th>Subject</th><th>Students</th><th>Avg %</th><th>High / Low</th></tr>
+                        </thead>
+                        <tbody id="examStatsTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/analytics.js') }}"></script>
+{% endblock %}

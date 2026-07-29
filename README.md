@@ -1,187 +1,307 @@
-# 🎓 Exam Management System
+# Examination Module
 
-A full-stack **Exam Management System** designed to simplify and organize the process of managing students, exams, and results. This application provides an efficient way for administrators to maintain examination records digitally and reduces manual record management.
-
----
-
-## 📌 Project Description
-
-The Exam Management System is a web-based application that allows users to manage:
-
-* Student information
-* Exam details
-* Examination results
-* User authentication and management
-
-The system uses a structured database design with relationships between students, exams, and results to maintain accurate and organized data.
+A full-stack **Examination Management System** built for the Robokalam Technologies Full Stack Web Development Intern assignment. It manages students, exams, and results with REST APIs, JWT authentication, and a responsive web UI.
 
 ---
 
-# ✨ Features
+## Tech Stack
 
-## 👨‍🎓 Student Management
-
-✅ Add new students
-✅ View student records
-✅ Store student details
-✅ Manage student information
-
-## 📝 Exam Management
-
-✅ Create and manage exams
-✅ Store exam details
-✅ Generate unique exam IDs
-✅ Maintain exam records
-
-## 📊 Result Management
-
-✅ Add student results
-✅ Connect students with exams
-✅ Store marks and performance details
-✅ View examination results
-
-## 🔐 User Management
-
-✅ User authentication
-✅ Admin access management
-✅ Secure database operations
+| Layer | Technology |
+|-------|-----------|
+| Backend | Python, Flask |
+| Frontend | HTML5, CSS3, Bootstrap 5, JavaScript (Fetch API) |
+| Database | MySQL |
+| Authentication | JWT (API) + Session (Web UI) |
+| Password Hashing | Werkzeug (scrypt) |
 
 ---
 
-# 🛠️ Technologies Used
-
-## Frontend
-
-* HTML5
-* CSS3
-* Bootstrap
-* JavaScript
-
-## Backend
-
-* (Add your backend here: PHP / Flask / Java / Node.js)
-
-## Database
-
-* MySQL
-
-## Development Tools
-
-* Visual Studio Code
-* MySQL
-* Git & GitHub
-
----
-
-# 🗄️ Database Structure
-
-The project uses the following database tables:
-
-### 👤 Users Table
-
-Stores user login and authentication details.
-
-### 🎓 Students Table
-
-Stores student information such as student ID, name, and other details.
-
-### 📝 Exams Table
-
-Stores examination information including exam ID and exam details.
-
-### 📈 Results Table
-
-Stores student examination results and maintains relationships between students and exams.
-
-### Database Relationship
+## Project Structure
 
 ```
-Users
-
-Students
-    |
-    |
- Results
-    |
-    |
- Exams
+exam-module/
+├── app.py                  # Application entry point
+├── config.py               # Configuration settings
+├── requirements.txt        # Python dependencies
+├── database.sql            # Database schema + sample data
+├── .env.example            # Environment variables template
+│
+├── models/
+│   └── database.py         # MySQL connection handler
+│
+├── controllers/
+│   ├── auth_controller.py  # Login logic
+│   ├── student_controller.py
+│   ├── exam_controller.py
+│   └── result_controller.py
+│
+├── routes/
+│   ├── auth_routes.py      # /api/auth/*
+│   ├── student_routes.py   # /api/students/*
+│   ├── exam_routes.py      # /api/exams/*
+│   ├── result_routes.py    # /api/results/*
+│   └── page_routes.py      # Web page routes
+│
+├── utils/
+│   ├── auth.py             # JWT helpers, grade calculation
+│   └── validators.py       # Input validation
+│
+├── static/
+│   ├── css/style.css
+│   └── js/                 # Frontend API calls
+│
+└── templates/              # HTML pages
 ```
 
 ---
 
-# 🚀 Installation & Setup
+## Features
 
-Follow these steps to run the project locally.
+- **CRUD APIs** for Students, Exams, and Results
+- **JWT Authentication** for all API endpoints
+- **Login System** for web UI access
+- **Auto Grade Calculation** (A+ to F based on percentage)
+- **Input Validation** on all forms and API requests
+- **Analytics Dashboard** with pass rate, grade distribution, and exam stats
+- **Proper MVC Architecture** (Models, Routes, Controllers)
 
-## 1. Clone the Repository
+---
+
+## Database Design
+
+```
+users          students         exams
+  |               |                |
+  |               +---- results ---+
+  |                    (FK)
+  id, username         id, student_id, exam_id
+  password             marks, grade, percentage
+```
+
+### Tables
+
+| Table | Description |
+|-------|------------|
+| `users` | Admin login credentials |
+| `students` | Student records (name, email, phone, course) |
+| `exams` | Exam details (name, subject, total marks) |
+| `results` | Student exam results with auto-calculated grade |
+
+### Grade Scale
+
+| Percentage | Grade |
+|-----------|-------|
+| 90%+ | A+ |
+| 80-89% | A |
+| 70-79% | B |
+| 60-69% | C |
+| 40-59% | D |
+| Below 40% | F |
+
+---
+
+## Setup & Run
+
+### Prerequisites
+
+- Python 3.10+
+- MySQL Server
+
+### 1. Clone the repository
 
 ```bash
-git clone your-repository-link
+git clone https://github.com/YOUR_USERNAME/exam-module.git
+cd exam-module
 ```
 
-## 2. Open Project
+### 2. Create virtual environment
 
-Open the project folder in **Visual Studio Code**.
+```bash
+python -m venv venv
 
-## 3. Setup Database
+# Windows
+venv\Scripts\activate
 
-Create a MySQL database:
-
-```sql
-CREATE DATABASE exam_db;
+# Linux/Mac
+source venv/bin/activate
 ```
 
-Import the required tables into the database.
+### 3. Install dependencies
 
-## 4. Configure Database Connection
-
-Update your database configuration:
-
-```
-Database Name: exam_db
-Username: root
-Password: your_password
+```bash
+pip install -r requirements.txt
 ```
 
-## 5. Run the Application
+### 4. Setup database
 
-Start your local server and open the project in your browser.
+```bash
+mysql -u root -p < database.sql
+```
+
+Or run the SQL manually in MySQL Workbench.
+
+### 5. Configure environment
+
+```bash
+copy .env.example .env
+```
+
+Edit `.env` with your MySQL password:
+
+```
+MYSQL_PASSWORD=your_mysql_password
+```
+
+### 6. Run the application
+
+```bash
+python app.py
+```
+
+Open **http://localhost:5000** in your browser.
+
+### Default Login
+
+| Username | Password |
+|----------|----------|
+| admin | admin123 |
 
 ---
 
-# 📷 Screenshots
+## API Endpoints
 
-Add screenshots of your application:
+All API endpoints (except login) require JWT token in header:
+```
+Authorization: Bearer <token>
+```
 
-* Login Page
-* Student Management Page
-* Exam Management Page
-* Results Page
+### Authentication
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/login` | Login and get JWT token |
+| POST | `/api/login` | Web login (returns token + session) |
+| GET | `/api/auth/verify` | Verify token validity |
+
+**Login Request:**
+```json
+{
+  "username": "admin",
+  "password": "admin123"
+}
+```
+
+**Login Response:**
+```json
+{
+  "success": true,
+  "message": "Login successful",
+  "token": "eyJhbGciOiJIUzI1NiIs...",
+  "username": "admin"
+}
+```
+
+### Students
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/students` | Get all students |
+| GET | `/api/students/:id` | Get student by ID |
+| POST | `/api/students` | Create student |
+| PUT | `/api/students/:id` | Update student |
+| DELETE | `/api/students/:id` | Delete student |
+
+**Create Student:**
+```json
+{
+  "student_name": "John Doe",
+  "email": "john@example.com",
+  "phone": "9876543210",
+  "course": "Computer Science"
+}
+```
+
+### Exams
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/exams` | Get all exams |
+| GET | `/api/exams/:id` | Get exam by ID |
+| POST | `/api/exams` | Create exam |
+| PUT | `/api/exams/:id` | Update exam |
+| DELETE | `/api/exams/:id` | Delete exam |
+
+**Create Exam:**
+```json
+{
+  "exam_name": "Mid Term",
+  "subject": "Data Structures",
+  "total_marks": 100
+}
+```
+
+### Results
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/results` | Get all results (with joins) |
+| GET | `/api/results/analytics` | Get analytics data |
+| GET | `/api/results/:id` | Get result by ID |
+| POST | `/api/results` | Create result (auto grade) |
+| PUT | `/api/results/:id` | Update result |
+| DELETE | `/api/results/:id` | Delete result |
+
+**Create Result:**
+```json
+{
+  "student_id": 1,
+  "exam_id": 1,
+  "marks": 85
+}
+```
+
+**Response includes auto-calculated grade:**
+```json
+{
+  "success": true,
+  "data": {
+    "marks": 85,
+    "grade": "A",
+    "percentage": 85.0
+  }
+}
+```
 
 ---
 
-# 🔮 Future Enhancements
+## Testing with Postman
 
-Some improvements planned for future versions:
-
-* Online examination system
-* Automatic result calculation
-* PDF result generation
-* Student login portal
-* Email notifications
-* Improved user interface
+1. **Login:** POST `http://localhost:5000/api/auth/login` with admin credentials
+2. Copy the `token` from response
+3. Add header: `Authorization: Bearer <token>`
+4. Test CRUD endpoints
 
 ---
 
-# 👨‍💻 Developer
+## Screenshots
 
-**Vinay**
-
-GitHub:
-(Add your GitHub profile link)
+> Add screenshots here before submission:
+> - Login page
+> - Dashboard
+> - Student / Exam / Result management
+> - Analytics page
+> - Postman API responses
 
 ---
 
-# 📄 License
+## Developer
+
+**RECHINTHALA VINAY**
+
+Robokalam Technologies — Full Stack Web Development Intern Assignment
+
+---
+
+## License
 
 This project is developed for educational and internship purposes.
