@@ -1,0 +1,1 @@
+from controllers.student_controller import student_bp
