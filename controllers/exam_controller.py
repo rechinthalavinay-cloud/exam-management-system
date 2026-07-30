@@ -5,7 +5,7 @@ from utils.validators import validate_exam
 def get_all_exams():
     db = get_db()
     cursor = db.cursor()
-    cursor.execute("SELECT * FROM exams ORDER BY id DESC")
+    cursor.execute("SELECT * FROM exams ORDER BY id ASC")
     exams = cursor.fetchall()
     cursor.close()
     return {"success": True, "data": exams}, 200
