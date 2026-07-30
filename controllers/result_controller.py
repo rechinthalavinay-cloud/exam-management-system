@@ -32,7 +32,7 @@ def get_all_results():
         FROM results r
         INNER JOIN students s ON r.student_id = s.id
         INNER JOIN exams e ON r.exam_id = e.id
-        ORDER BY r.id DESC
+        ORDER BY r.id ASC
         """
     )
     results = cursor.fetchall()

@@ -67,6 +67,31 @@ async function loadResults() {
         .join("");
 }
 
+function gradeBadge(grade) {
+    let color = "secondary";
+
+    switch (grade) {
+        case "A+":
+            color = "primary";   // Blue
+            break;
+        case "A":
+            color = "success";   // Green
+            break;
+        case "B":
+            color = "warning";   // Yellow
+            break;
+        case "C":
+            color = "info";     // Light blue
+            break;
+        case "D":
+        case "F":
+            color = "danger";   // Red
+            break;
+    }
+
+    return `<span class="badge bg-${color}">${grade}</span>`;
+}
+
 async function handleAdd(e) {
     e.preventDefault();
     const form = e.target;

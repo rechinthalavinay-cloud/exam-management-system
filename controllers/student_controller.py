@@ -5,7 +5,7 @@ from utils.validators import validate_student
 def get_all_students():
     db = get_db()
     cursor = db.cursor()
-    cursor.execute("SELECT * FROM students ORDER BY id DESC")
+    cursor.execute("SELECT * FROM students ORDER BY id ASC")
     students = cursor.fetchall()
     cursor.close()
     return {"success": True, "data": students}, 200
