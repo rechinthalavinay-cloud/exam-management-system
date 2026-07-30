@@ -214,7 +214,7 @@ def get_analytics():
         SELECT grade, COUNT(*) AS count
         FROM results
         GROUP BY grade
-        ORDER BY count DESC
+        ORDER BY count ASC
         """
     )
     grade_distribution = cursor.fetchall()
@@ -228,7 +228,7 @@ def get_analytics():
         FROM students s
         LEFT JOIN results r ON s.id = r.student_id
         GROUP BY s.id, s.student_name
-        ORDER BY avg_percentage DESC
+        ORDER BY avg_percentage ASC
         """
     )
     student_performance = cursor.fetchall()
